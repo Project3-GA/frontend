@@ -1,12 +1,23 @@
-import React, {useState} from 'react';
-import Form from "./Form"
-
+import React, { useState } from 'react';
+import Form from './Form';
+import Cardform from './Cardform';
 function App() {
-  return (
-    <main>
-      <h1>React Forms</h1>
-      <Form />
-      {/* <form onSubmit={handleSubmit}>
+	const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+	const [user, setUser] = useState({
+		email: '',
+		password: '',
+	});
+	return (
+		<main>
+			<h1>React Forms</h1>
+			<Form
+				loginForm={loginForm}
+				user={user}
+				setUser={setUser}
+				setLoginForm={setLoginForm}
+			/>
+			<Cardform loginForm={loginForm} />
+			{/* <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email: </label>
         <input 
           type="email" 
@@ -36,8 +47,8 @@ function App() {
         </select>
         <button type="submit">submit</button>
       </form> */}
-    </main>
-  );
+		</main>
+	);
 }
 
 export default App;
