@@ -18,7 +18,7 @@ const LoginForm = ({ user, setUser }) => {
 			body: JSON.stringify(user),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => localStorage.setItem('token', JSON.stringify(data)))
 			.catch(() => setError(true));
 	};
 	return (
