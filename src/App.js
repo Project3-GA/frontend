@@ -3,13 +3,14 @@ import Form from './Form';
 import Cardform from './Cardform';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import Gallery from './components/Gallery'
 import { Route } from 'react-router-dom';
 function App() {
 	const [user, setUser] = useState({ email: '', password: '' });
 
 	return (
 		<main>
-			<h1>React Forms</h1>
+			<h1>hatCrew</h1>
 			<Route
 				path='/signup'
 				render={(routerProps) => <SignupForm user={user} setUser={setUser} />}
@@ -18,6 +19,11 @@ function App() {
 				path='/signin'
 				render={(routerProps) => <LoginForm user={user} setUser={setUser} />}
 			/>
+
+			<Route
+				path='/gallery' component={Gallery}
+			/>
+
 			{/* <Form
 				loginForm={loginForm}
 				user={user}
