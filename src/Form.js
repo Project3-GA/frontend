@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = ({ loginForm, setLoginForm, setUser }) => {
+const Form = ({ loginForm, setLoginForm }) => {
 	const [error, setError] = useState(false);
 	const handleChange = (event) => {
 		setLoginForm({ ...loginForm, [event.target.id]: event.target.value });
@@ -17,7 +17,7 @@ const Form = ({ loginForm, setLoginForm, setUser }) => {
 			body: JSON.stringify(loginForm),
 		})
 			.then((res) => res.json())
-			.then((data) => setUser(data))
+			.then((data) => data)
 			.catch(() => setError(true));
 	};
 	const handleSignIn = (event) => {
