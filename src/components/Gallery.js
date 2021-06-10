@@ -21,7 +21,6 @@ const Gallery = () => {
             .catch(() => setError(true));
     };
 
-    console.log(cards[0]._id)
 
     return (
         <div>
