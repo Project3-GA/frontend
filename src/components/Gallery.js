@@ -23,7 +23,7 @@ const Gallery = () => {
 
 
     return (
-        <div>
+        <div className="gallery">
             <button onClick={getCards}>
                 GET Cards
             </button>
@@ -32,9 +32,10 @@ const Gallery = () => {
                 cards.map(card => {
                     return (
                         <>
-                            <h1>{card._id}</h1>
+                            {/* <h1>{card._id}</h1> */}
 
                             <img src={card.url} alt="picture" />
+                            {/* <p>{card.tags}</p> */}
                         </>
                     )
                 })
