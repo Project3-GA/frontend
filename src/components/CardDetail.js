@@ -11,13 +11,13 @@ const CardDetail = ({ match }) => {
   // console.log(params);
   const history = useHistory();
 
-	const handleChange = (event) => {
-		setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
-	};
+  const handleChange = (event) => {
+    setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
+  };
 
 
   useEffect(() => {
-    const url = `http://localhost:3000/api/cards/${params.id}`;
+    const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -30,34 +30,34 @@ const CardDetail = ({ match }) => {
       .catch(() => setError(true));
   }, [cardEdit]);
 
-  function cardDelete(){
-    const url = `http://localhost:3000/api/cards/${params.id}`;
+  function cardDelete() {
+    const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
     fetch(url, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${token}`,
       }
-      })
-        .then(history.goBack())
-        .catch(() => setError(true));
+    })
+      .then(history.goBack())
+      .catch(() => setError(true));
   }
 
   const cardUpdate = (event) => {
     event.preventDefault();
-    const url = `http://localhost:3000/api/cards/${params.id}`;
+    const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
     fetch(url, {
-        method: 'PATCH',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(cardEdit),
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(cardEdit),
     })
-        .then((res) => res.json())
-        .then((data) => setCardEdit(data))
-        .catch(() => setError(true));
-};
+      .then((res) => res.json())
+      .then((data) => setCardEdit(data))
+      .catch(() => setError(true));
+  };
 
 
 
@@ -70,17 +70,17 @@ const CardDetail = ({ match }) => {
       <button onClick={cardDelete}>Delete IMG</button>
 
       <form onSubmit={cardUpdate}>
-					<label htmlFor='url'>image/gif url:</label>
-					<input id='url' type='text' onChange={handleChange} />
-					<label htmlFor='tags'>tags:</label>
-					<input id='tags' type='text' onChange={handleChange} />
-					<button type='submit' className="submit-button">submit</button>
-				</form>
-        {!cards.tags ? null:
-          <ul> {cards.tags.map((tag)=>
+        <label htmlFor='url'>image/gif url:</label>
+        <input id='url' type='text' onChange={handleChange} />
+        <label htmlFor='tags'>tags:</label>
+        <input id='tags' type='text' onChange={handleChange} />
+        <button type='submit' className="submit-button">submit</button>
+      </form>
+      {!cards.tags ? null :
+        <ul> {cards.tags.map((tag) =>
           <li>{tag}</li>)}
-          </ul>}
-  
+        </ul>}
+
     </div>
   );
 };

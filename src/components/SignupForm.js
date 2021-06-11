@@ -10,7 +10,7 @@ const SignupForm = ({ user, setUser }) => {
 	const handleSignUp = (event) => {
 		event.preventDefault();
 
-		const url = 'http://localhost:3000/api/users/signup';
+		const url = 'https://hatcrew-be.herokuapp.com/api/users/signup';
 		fetch(url, {
 			method: 'POST',
 			headers: {

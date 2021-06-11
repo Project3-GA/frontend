@@ -10,7 +10,7 @@ const LoginForm = ({ user, setUser }) => {
 	const handleSignIn = (event) => {
 		event.preventDefault();
 
-		const url = 'http://localhost:3000/api/users/signin';
+		const url = 'https://hatcrew-be.herokuapp.com/api/users/signin';
 		fetch(url, {
 			method: 'POST',
 			headers: {

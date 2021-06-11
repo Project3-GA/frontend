@@ -8,7 +8,7 @@ const Gallery = () => {
 
 
     useEffect(() => {
-        const url = 'http://localhost:3000/api/cards';
+        const url = 'https://hatcrew-be.herokuapp.com/api/cards';
         fetch(url, {
             method: 'GET',
             headers: {

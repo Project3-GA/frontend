@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 const CardCreate = () => {
-    const [card ,setCard] = useState({url: "", tags: []})
+	const [card, setCard] = useState({ url: "", tags: [] })
 	const [error, setError] = useState(false);
-    const token = localStorage.getItem('token')
+	const token = localStorage.getItem('token')
 
 	const handleChange = (event) => {
 		setCard({ ...card, [event.target.id]: event.target.value });
@@ -12,12 +12,12 @@ const CardCreate = () => {
 	const handleSignIn = (event) => {
 		event.preventDefault();
 
-		const url = 'http://localhost:3000/api/cards';
+		const url = 'https://hatcrew-be.herokuapp.com/api/cards';
 		fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
-                'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${token}`
 			},
 			body: JSON.stringify(card),
 		})
