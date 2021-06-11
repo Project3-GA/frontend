@@ -1,13 +1,9 @@
 import "./App.css";
 import React, { useState } from "react";
-import CardCreate from "./components/CardCreate";
-import CardDetail from "./components/CardDetail";
-import Nav from "./components/Nav";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
-import Gallery from "./components/Gallery";
-import PrivateRoute from "./components/PrivateRoute";
+import { CardCreate, CardDetail, Nav, LoginForm, SignupForm, Gallery, PrivateRoute } from './components'
+
 import { Route, Switch } from "react-router-dom";
+
 function App() {
   const [user, setUser] = useState({ email: "", password: "" });
 
