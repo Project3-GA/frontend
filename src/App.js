@@ -1,7 +1,6 @@
 import './App.css'
 import React, { useState } from 'react';
-import Form from './Form';
-import Cardform from './Cardform';
+import CardCreate from './components/CardCreate'
 import Nav from './components/Nav'
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
@@ -23,6 +22,9 @@ function App() {
 					path='/signin'
 					render={(routerProps) => <LoginForm user={user} setUser={setUser} />}
 				/>
+				<PrivateRoute path='/gallery/create'>
+					<CardCreate />
+				</PrivateRoute>
 
 				<PrivateRoute path='/gallery'>
 					<Gallery />
