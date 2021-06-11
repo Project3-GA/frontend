@@ -20,7 +20,7 @@ const Gallery = () => {
             .then((data) => setCards(data))
             .catch(() => setError(true));
 
-    }, [cards])
+    }, [])
 
     return (
         <div className="gallery">
@@ -31,7 +31,7 @@ const Gallery = () => {
                         <>
                             {/* <h1>{card._id}</h1> */}
 
-                            <Link to={`/gallery/${card._id}`}> <img src={card.url} alt="picture" key={card.id}/></Link>
+                            <Link to={`/gallery/${card._id}`}> <img src={card.url} alt="picture" key={card.id} /></Link>
                             {/* <p>{card.tags}</p> */}
                         </>
                     )
