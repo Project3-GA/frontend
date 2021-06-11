@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 
 const SignupForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
@@ -22,7 +23,7 @@ const SignupForm = ({ user, setUser }) => {
 			.catch(() => setError(true));
 	};
 	return (
-		<div>
+		<div className="form">
 			<form onSubmit={handleSignUp}>
 				<label htmlFor='email'>Email</label>
 				<input id='email' type='text' onChange={handleChange} />
@@ -30,7 +31,8 @@ const SignupForm = ({ user, setUser }) => {
 				<input id='password' type='text' onChange={handleChange} />
 				<label htmlFor='Confirm password'> Confirm Password</label>
 				<input id='confirm' type='text' />
-				<button type='submit'>submit</button>
+				<button type='submit' className="submit-button">submit</button>
+				<p>already have an account? sign-in <Link to="/signin"><span>here</span></Link>.</p>
 			</form>
 		</div>
 	);

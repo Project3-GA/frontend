@@ -1,6 +1,8 @@
+import './App.css'
 import React, { useState } from 'react';
 import Form from './Form';
 import Cardform from './Cardform';
+import Nav from './components/Nav'
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Gallery from './components/Gallery'
@@ -10,8 +12,8 @@ function App() {
 	const [user, setUser] = useState({ email: '', password: '' });
 
 	return (
-		<main>
-			<h1>hatCrew</h1>
+		<main className="container">
+			<Nav />
 			<Switch>
 				<Route
 					path='/signup'

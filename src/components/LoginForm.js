@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 
 const LoginForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
@@ -23,13 +24,13 @@ const LoginForm = ({ user, setUser }) => {
 	};
 	return (
 		<div>
-			<div>
+			<div className="form">
 				<form onSubmit={handleSignIn}>
 					<label htmlFor='email'>Email</label>
 					<input id='email' type='text' onChange={handleChange} />
 					<label htmlFor='password'>Password</label>
 					<input id='password' type='text' onChange={handleChange} />
-					<button type='submit'>submit</button>
+					<button type='submit' className="submit-button">submit</button>
 				</form>
 			</div>
 		</div>
