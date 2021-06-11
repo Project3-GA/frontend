@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 
 const Gallery = () => {
     const token = localStorage.getItem('token')
     const [error, setError] = useState(false);
     const [cards, setCards] = useState([])
 
-    const getCards = (event) => {
-        event.preventDefault();
 
+    useEffect(() => {
         const url = 'http://localhost:3000/api/cards';
         fetch(url, {
             method: 'GET',
@@ -19,14 +19,11 @@ const Gallery = () => {
             .then((res) => res.json())
             .then((data) => setCards(data))
             .catch(() => setError(true));
-    };
 
+    }, [cards])
 
     return (
         <div className="gallery">
-            <button onClick={getCards}>
-                GET Cards
-            </button>
 
             {
                 cards.map(card => {
@@ -34,7 +31,7 @@ const Gallery = () => {
                         <>
                             {/* <h1>{card._id}</h1> */}
 
-                            <img src={card.url} alt="picture" />
+                            <Link to={`/gallery/${card._id}`}> <img src={card.url} alt="picture" key={card.id}/></Link>
                             {/* <p>{card.tags}</p> */}
                         </>
                     )
