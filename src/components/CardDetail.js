@@ -6,34 +6,38 @@ const CardDetail = ({ match }) => {
 	const [error, setError] = useState(false);
 	const [cards, setCards] = useState({});
 	const [cardEdit, setCardEdit] = useState({});
+	const [tags, setTags] = useState([])
+
 	// const id = match.id
 	let params = useParams();
 	// console.log(params);
 	const history = useHistory();
 
 	const handleChange = (event) => {
-		setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
+		if (event.target.id === 'tags') {
+			const copy = [...cardEdit.tags]
+			copy.push(event.target.value)
+			setTags(copy)
+		} else {
+			setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
+		}
 	};
 
+
 	useEffect(() => {
-		api.getCardDetails(params, setCards, setError);
+		api.getCardDetails(params, setCards, setCardEdit, setError);
 	}, [cardEdit]);
 
-	function cardDelete() {
-		const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
-		fetch(url, {
-			method: 'DELETE',
-			headers: {
-				'Content-type': 'application/json; charset=UTF-8',
-				Authorization: `Bearer ${token}`,
-			},
-		})
-			.then(history.goBack())
-			.catch(() => setError(true));
-	}
 
-	const cardUpdate = (event) => {
+
+
+	const cardUpdate = async (event) => {
 		event.preventDefault();
+		if (tags.length && tags[tags.length - 1]) {
+			const copy = { ...cardEdit }
+			copy.tags.push(tags[tags.length - 1])
+			await setCardEdit(copy)
+		}
 		api.cardUpdate(params, cardEdit, setCardEdit, setError);
 	};
 
@@ -41,7 +45,8 @@ const CardDetail = ({ match }) => {
 		<div className='gallery'>
 			<img src={cards.url} alt='picture' />
 
-			<button onClick={cardDelete}>Delete IMG</button>
+			<button onClick={() => api.cardDelete(params, history, setError)
+			}>Delete IMG</button>
 
 			<form onSubmit={cardUpdate}>
 				<label htmlFor='url'>image/gif url:</label>
