@@ -42,7 +42,7 @@ a {
 }
 
 a:hover {
-  color: black;
+  color: rgb(47, 128, 128);
 }
 
 form {
@@ -76,6 +76,13 @@ label {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 5px;
 }
+
+.gallerydetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 
 img {
   max-width: 400px;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory  } from 'react-router-dom';
+
 import * as api from './APIFile';
 const SignupForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
@@ -7,9 +8,11 @@ const SignupForm = ({ user, setUser }) => {
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
 	};
+	let history = useHistory()
 	const handleSignUp = (event) => {
 		event.preventDefault();
 		api.postSignUp(user, setError);
+		history.push("/signin")
 	};
 	return (
 		<div className='form'>
@@ -23,13 +26,7 @@ const SignupForm = ({ user, setUser }) => {
 				<button type='submit' className='submit-button'>
 					submit
 				</button>
-				<p>
-					already have an account? sign-in{' '}
-					<Link to='/signin'>
-						<span>here</span>
-					</Link>
-					.
-				</p>
+		
 			</form>
 		</div>
 	);

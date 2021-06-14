@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as api from './APIFile';
 const LoginForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
+	let history = useHistory()
 
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
@@ -10,6 +11,8 @@ const LoginForm = ({ user, setUser }) => {
 	const handleSignIn = (event) => {
 		event.preventDefault();
 		api.postSignIn(user, setError);
+		history.push("/gallery")
+		window.location.reload()
 	};
 	return (
 		<div>
@@ -22,6 +25,13 @@ const LoginForm = ({ user, setUser }) => {
 					<button type='submit' className='submit-button'>
 						submit
 					</button>
+					<p>
+					need an account? sign-up{' '}
+					<Link to='/signup'>
+						<span>here</span>
+					</Link>
+					.
+				</p>
 				</form>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
+import { BsTrash } from 'react-icons/bs'
+
 import * as api from './APIFile';
 const CardDetail = ({ match }) => {
 	const token = localStorage.getItem('token');
@@ -42,15 +44,15 @@ const CardDetail = ({ match }) => {
 	};
 
 	return (
-		<div className='gallery'>
+		<div className='gallerydetails'>
 			<img src={cards.url} alt='picture' />
 
-			<button onClick={() => api.cardDelete(params, history, setError)
-			}>Delete IMG</button>
+			<BsTrash className="trash" onClick={() => api.cardDelete(params, history, setError)
+			}>Delete IMG</BsTrash>
 
 			<form onSubmit={cardUpdate}>
-				<label htmlFor='url'>image/gif url:</label>
-				<input id='url' type='text' onChange={handleChange} />
+				{/* <label htmlFor='url'>image/gif url:</label>
+				<input id='url' type='text' onChange={handleChange} /> */}
 				<label htmlFor='tags'>tags:</label>
 				<input id='tags' type='text' onChange={handleChange} />
 				<button type='submit' className='submit-button'>
