@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as api from './APIFile';
 const CardCreate = () => {
+	let history = useHistory();
 	const [card, setCard] = useState({ url: '', tags: [] });
 	const [error, setError] = useState(false);
 	const token = localStorage.getItem('token');
@@ -9,9 +10,10 @@ const CardCreate = () => {
 	const handleChange = (event) => {
 		setCard({ ...card, [event.target.id]: event.target.value });
 	};
-	const handleCardCreate = (event) => {
+	const handleCardCreate = async (event) => {
 		event.preventDefault();
-		api.createCard(card, setError);
+		await api.createCard(card, setError);
+		history.push('/gallery');
 	};
 	return (
 		<div>

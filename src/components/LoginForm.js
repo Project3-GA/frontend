@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import * as api from './APIFile';
 const LoginForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
-	let history = useHistory()
+	let history = useHistory();
 
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
 	};
-	const handleSignIn = (event) => {
+	const handleSignIn = async (event) => {
 		event.preventDefault();
-		api.postSignIn(user, setError);
-		history.push("/gallery")
-		window.location.reload()
+		let data = await api.postSignIn(user, setError);
+		localStorage.setItem('token', data.token);
+		history.push('/gallery');
 	};
 	return (
 		<div>
@@ -26,12 +26,12 @@ const LoginForm = ({ user, setUser }) => {
 						submit
 					</button>
 					<p>
-					need an account? sign-up{' '}
-					<Link to='/signup'>
-						<span>here</span>
-					</Link>
-					.
-				</p>
+						need an account? sign-up{' '}
+						<Link to='/signup'>
+							<span>here</span>
+						</Link>
+						.
+					</p>
 				</form>
 			</div>
 		</div>
