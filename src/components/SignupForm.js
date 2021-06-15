@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { Link, useHistory  } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import * as api from './APIFile';
 const SignupForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
-	// const [user, setUser] = useState({ email: '', password: '' });
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
 	};
-	let history = useHistory()
+	let history = useHistory();
 	const handleSignUp = (event) => {
 		event.preventDefault();
 		// Check if password & confirm password matches
-		if(user.password === user.confirm){
+		if (user.password === user.confirm) {
 			api.postSignUp(user, setError);
-			history.push("/signin")
+			history.push('/signin');
 		} else {
-			setError(true)
+			setError(true);
 		}
 	};
 	return (
@@ -31,10 +30,16 @@ const SignupForm = ({ user, setUser }) => {
 				<button type='submit' className='submit-button'>
 					submit
 				</button>
-				{
-					error ? <p>Passwords do not match, please check and try again.</p> : null
-				}
-		
+				<p>
+					already have an account? sign in{' '}
+					<Link to='/signin'>
+						<span>here</span>
+					</Link>
+					.
+				</p>
+				{error ? (
+					<p>passwords do not match, please check and try again.</p>
+				) : null}
 			</form>
 		</div>
 	);

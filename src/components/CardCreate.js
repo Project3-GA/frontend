@@ -5,8 +5,6 @@ const CardCreate = () => {
 	let history = useHistory();
 	const [card, setCard] = useState({ url: '', tags: [] });
 	const [error, setError] = useState(false);
-	const token = localStorage.getItem('token');
-
 	const handleChange = (event) => {
 		setCard({ ...card, [event.target.id]: event.target.value });
 	};
@@ -17,7 +15,7 @@ const CardCreate = () => {
 	};
 	return (
 		<div>
-			<div className='form'>
+			<div className='form create-card'>
 				<form onSubmit={handleCardCreate}>
 					<label htmlFor='url'>image/gif url:</label>
 					<input id='url' type='text' onChange={handleChange} />

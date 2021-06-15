@@ -7,11 +7,10 @@ const Nav = () => {
 			<h1>
 				<Link to='/gallery'>working title</Link>
 			</h1>
-			<ul>
+			<ul className='nav-ul'>
 				<li>
 					<Link to='/gallery'>home</Link>
 				</li>
-				{/* <li><Link to="/signup">login</Link></li> */}
 				<li>
 					<Link
 						to='/signin'
