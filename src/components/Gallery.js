@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from './APIFile';
-const Gallery = () => {
+const Gallery = ({ cards, setCards }) => {
 	const [error, setError] = useState(false);
-	const [cards, setCards] = useState([]);
 
 	useEffect(() => {
 		api.getGallery(setCards, setError);
