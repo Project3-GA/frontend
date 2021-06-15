@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as api from './APIFile';
-const LoginForm = ({ user, setUser }) => {
+const LoginForm = ({ user, setUser, setActiveUser }) => {
 	const [error, setError] = useState(false);
 	let history = useHistory();
 
@@ -11,6 +11,7 @@ const LoginForm = ({ user, setUser }) => {
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		let data = await api.postSignIn(user, setError);
+		setActiveUser(data ? JSON.parse(atob(data.token.split('.')[1])).id : null);
 		if (!data) {
 			return null;
 		} else {
