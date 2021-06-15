@@ -11,8 +11,13 @@ const SignupForm = ({ user, setUser }) => {
 	let history = useHistory()
 	const handleSignUp = (event) => {
 		event.preventDefault();
-		api.postSignUp(user, setError);
-		history.push("/signin")
+		// Check if password & confirm password matches
+		if(user.password === user.confirm){
+			api.postSignUp(user, setError);
+			history.push("/signin")
+		} else {
+			setError(true)
+		}
 	};
 	return (
 		<div className='form'>
@@ -22,10 +27,13 @@ const SignupForm = ({ user, setUser }) => {
 				<label htmlFor='password'>Password</label>
 				<input id='password' type='text' onChange={handleChange} />
 				<label htmlFor='Confirm password'> Confirm Password</label>
-				<input id='confirm' type='text' />
+				<input id='confirm' onChange={handleChange} type='text' />
 				<button type='submit' className='submit-button'>
 					submit
 				</button>
+				{
+					error ? <p>Passwords do not match, please check and try again.</p> : null
+				}
 		
 			</form>
 		</div>

@@ -3,7 +3,7 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { BsTrash } from 'react-icons/bs'
 
 import * as api from './APIFile';
-const CardDetail = ({ match }) => {
+const CardDetail = ({ user }) => {
 	const token = localStorage.getItem('token');
 	const [error, setError] = useState(false);
 	const [cards, setCards] = useState({});
@@ -47,8 +47,10 @@ const CardDetail = ({ match }) => {
 		<div className='gallerydetails'>
 			<img src={cards.url} alt='picture' />
 
-			<BsTrash className="trash" onClick={() => api.cardDelete(params, history, setError)
-			}>Delete IMG</BsTrash>
+			{ 
+			<BsTrash className="trash" onClick={() => api.cardDelete(params, history, setError)}>Delete IMG</BsTrash>
+			}
+
 
 			<form onSubmit={cardUpdate}>
 				{/* <label htmlFor='url'>image/gif url:</label>

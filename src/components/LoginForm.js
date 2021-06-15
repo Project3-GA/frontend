@@ -3,6 +3,7 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 import * as api from './APIFile';
 const LoginForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
+	// const 
 	let history = useHistory();
 
 	const handleChange = (event) => {
@@ -11,8 +12,17 @@ const LoginForm = ({ user, setUser }) => {
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		let data = await api.postSignIn(user, setError);
-		localStorage.setItem('token', data.token);
-		history.push('/gallery');
+
+		// api.postFindName(user,setError, setActiveUser)
+		// console.log(data)
+
+		if (!data){
+			return null
+		} else {
+			localStorage.setItem('token', data.token);
+			history.push('/gallery');
+		}
+		
 	};
 	return (
 		<div>
@@ -25,6 +35,9 @@ const LoginForm = ({ user, setUser }) => {
 					<button type='submit' className='submit-button'>
 						submit
 					</button>
+					{
+						error ? <p>Password or Email is incorrect, please try again.</p> : null
+					}
 					<p>
 						need an account? sign-up{' '}
 						<Link to='/signup'>

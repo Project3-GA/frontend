@@ -189,6 +189,21 @@ export const postSignIn = (user, setError) => {
 		.catch(() => setError(true));
 };
 
+// export const postFindName = (user, setError, setActiveUser) => {
+// 	const url = `http://localhost:3000/api/users/`;
+// 	fetch(url, {
+// 		method: 'GET',
+// 		headers: {
+// 			'Content-type': 'application/json; charset=UTF-8',
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 		body: JSON.stringify(user),
+// 	})
+// 		.then((res) => res.json())
+// 		.then((data) => console.log(data)) 
+// 		.catch(() => setError(true));
+// }
+
 export const cardDelete = (params, history, setError) => {
 	const url = `http://localhost:3000/api/cards/${params.id}`;
 	fetch(url, {
