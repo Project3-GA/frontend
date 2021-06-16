@@ -234,5 +234,6 @@ export const getPersonal = (activeUser, setCards, setError) => {
 		},
 	})
 		.then((res) => res.json())
+		.then((data) => setCards(data))
 		.catch(() => setError(true));
 };

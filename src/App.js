@@ -35,6 +35,7 @@ function App() {
 							user={user}
 							setUser={setUser}
 							setActiveUser={setActiveUser}
+							activeUser={activeUser}
 						/>
 					)}
 				/>

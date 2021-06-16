@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 const UserCollection = ({ activeUser, setCards, cards }) => {
 	const [error, setError] = useState(false);
 
-	useEffect(async () => {
-		let data = await api.getPersonal(activeUser, setCards, setError);
-		setCards(data);
+	useEffect(() => {
+		api.getPersonal(activeUser, setCards, setError);
 	}, []);
 
 	return (

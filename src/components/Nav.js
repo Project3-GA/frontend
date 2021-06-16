@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = ({ activeUser }) => {
+const Nav = ({}) => {
+	const user = localStorage.getItem('user');
 	return (
 		<div className='nav'>
 			<h1>
@@ -25,7 +26,7 @@ const Nav = ({ activeUser }) => {
 					<Link to='/gallery/create'>add +</Link>
 				</li>
 				<li>
-					<Link to={`/collection/${activeUser}`}>Personal Collection</Link>
+					<Link to={`/collection/${user}`}>Personal Collection</Link>
 				</li>
 			</ul>
 		</div>
