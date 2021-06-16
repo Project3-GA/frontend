@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Image Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description:
 
-## Available Scripts
+A community-based app where users can post and organize ideas about goals or interests. Users can also tag images and collections to share their interests.
 
-In the project directory, you can run:
+## Deployment:
 
-### `npm start`
+hatcrew.herokuapp.com/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Wireframes:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![proposalwireframe]]https://media.git.generalassemb.ly/user/35733/files/6ddda000-c872-11eb-9c9b-930ee121d797
 
-### `npm test`
+![routingImage](https://media.git.generalassemb.ly/user/35453/files/d3e69c00-ce0b-11eb-8e4e-9405ceda7d2d)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology Used:
 
-### `npm run build`
+Javascript, HTML, CSS
+Frontend: React.js, Express, RESTful API
+Backend: MongoDB, Mongoose
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Requirements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+node
+Express.js
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Resources:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Create react App with : https://github.com/facebook/create-react-appneed
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## User Stories:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- I want to look at photos of things I like.
+- I want to show off what I like
+- I want to make sure that only the images I like show up.
+- I want to update tags on images.
 
-## Learn More
+## Git Workflow
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Feature Branch Workflow
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Planning Directory
 
-### Code Splitting
+A planning/ directory in the root of your repo containing a diagram mapping out your project domain. You are welcome to include other planning documents (e.g., wireframes, user stories).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Unsolved Problems
 
-### Analyzing the Bundle Size
+- Need to set up so certain actions are only permitted when user ID matches author ID (Delete IMGs & tags).
+- Allow all users to add tags to images but ONLY image authors can delete tags (Currently, while other users can NOT delete, it gives error messages).
+  EDIT: Resolved, got user ID from the token and set up the user ID/author ID checks for tags and images.
+- State occasionally disappears/ doesn't save and thus the image in the gallery disappears.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Future Plans
+- organizing images by tag
+- refactoring the code base
+## MVP
 
-### Making a Progressive Web App
+- Users can view all images, view single images, post new images, update images or delete images. ✅
+- Users can signup and login to the website. ✅
+- Website displays navigation bar with access to home bar, login screen, and the gallery.
+- The galley displays all images.
+- Selecting a single image displays an image with details and options to update and delete. ✅
+- Access attempts without authentication token will be redirected to the login/signup page. ✅
+- Deploy website. ✅
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Bronze:
 
-### Advanced Configuration
+- Set up an API file for crud commands for code legibility. ✅
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Silver:
 
-### Deployment
+1. Setup backend to allow user ID to be checked against author ID. ✅
+1. Setup collection of user created images to be displayed. ✅
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Gold:
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1.  Voting System( Users can click to vote for images that they like)

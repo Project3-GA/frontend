@@ -1,6 +1,42 @@
 //////////////////UPDATE BEFORE PUSHING TO MAIN//////////////////////////
 
+//setting the token in localStorage to use for authentication
 const token = localStorage.getItem('token');
+
+//Authentication//
+
+//Creates a new user in the database
+export const postSignUp = (user, setError) => {
+	const url = 'https://hatcrew-be.herokuapp.com/api/users/signup';
+	fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8',
+		},
+		body: JSON.stringify(user),
+	})
+		.then((res) => res.json())
+		.then((data) => console.log(data))
+		.catch(() => setError(true));
+};
+
+//Authenticates user and provides token
+export const postSignIn = (user, setError) => {
+	const url = 'https://hatcrew-be.herokuapp.com/api/users/signin';
+	return fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8',
+		},
+		body: JSON.stringify(user),
+	})
+		.then((res) => res.json())
+		.catch(() => setError(true));
+};
+
+//Cards//
+
+//Get all cards from the database and display in the gallery
 export const getGallery = (setCards, setError) => {
 	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
 	fetch(url, {
@@ -15,6 +51,7 @@ export const getGallery = (setCards, setError) => {
 		.catch(() => setError(true));
 };
 
+//Create a new card 
 export const createCard = (card, setError) => {
 	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
 	return fetch(url, {
@@ -28,6 +65,8 @@ export const createCard = (card, setError) => {
 		.then((res) => res.json())
 		.catch(() => setError(true));
 };
+
+//Get a specific a card from the database and displays on Card Details 
 export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
 	fetch(url, {
@@ -45,7 +84,7 @@ export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 		.catch(() => setError(true));
 };
 
-//// CARD DETAILS
+//Adding new tags to an individual card
 export const cardUpdate = (params, cardEdit, setCardEdit, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
 	fetch(url, {
@@ -57,36 +96,11 @@ export const cardUpdate = (params, cardEdit, setCardEdit, setError) => {
 		body: JSON.stringify(cardEdit),
 	})
 		.then((res) => res.json())
-		.then((data) => setCardEdit(data))
+		.then((data) => (data ? setCardEdit(data) : null))
 		.catch(() => setError(true));
 };
 
-export const postSignUp = (user, setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/users/signup';
-	fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
-		},
-		body: JSON.stringify(user),
-	})
-		.then((res) => res.json())
-		.then((data) => console.log(data))
-		.catch(() => setError(true));
-};
-export const postSignIn = (user, setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/users/signin';
-	return fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
-		},
-		body: JSON.stringify(user),
-	})
-		.then((res) => res.json())
-		.catch(() => setError(true));
-};
-
+//Deletes a card from the database
 export const cardDelete = (params, history, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
 	fetch(url, {
@@ -99,6 +113,8 @@ export const cardDelete = (params, history, setError) => {
 		.then(history.goBack())
 		.catch(() => setError(true));
 };
+
+//Deletes a tag from an individual card
 export const tagDelete = (tagName, params, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/tags/${params.id}`;
 	fetch(url, {
@@ -111,7 +127,25 @@ export const tagDelete = (tagName, params, setError) => {
 	}).catch(() => setError(true));
 };
 
+//Gets all cards created by the authenticated user
+export const getPersonal = (activeUser, setCards, setError) => {
+	const url = `https://hatcrew-be.herokuapp.com/api/cards/personal/${activeUser}`;
+	return fetch(url, {
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8',
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((res) => res.json())
+		.then((data) => setCards(data))
+		.catch(() => setError(true));
+};
+
+
 //////////LOCALHOST TESTING//////////
+
+
 
 // const token = localStorage.getItem('token');
 // export const getGallery = (setCards, setError) => {
@@ -170,7 +204,7 @@ export const tagDelete = (tagName, params, setError) => {
 // 		body: JSON.stringify(cardEdit),
 // 	})
 // 		.then((res) => res.json())
-// 		.then((data) => setCardEdit(data))
+// 		.then((data) => (data ? setCardEdit(data) : null))
 // 		.catch(() => setError(true));
 // };
 
@@ -222,4 +256,18 @@ export const tagDelete = (tagName, params, setError) => {
 // 		},
 // 		body: JSON.stringify({ tags: tagName }),
 // 	}).catch(() => setError(true));
+// };
+
+// export const getPersonal = (activeUser, setCards, setError) => {
+// 	const url = `http://localhost:3000/api/cards/personal/${activeUser}`;
+// 	return fetch(url, {
+// 		method: 'GET',
+// 		headers: {
+// 			'Content-type': 'application/json; charset=UTF-8',
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 	})
+// 		.then((res) => res.json())
+// 		.then((data) => setCards(data))
+// 		.catch(() => setError(true));
 // };
