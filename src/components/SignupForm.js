@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import * as api from './APIFile';
+
 const SignupForm = ({ user, setUser }) => {
 	const [error, setError] = useState(false);
+
+	//Setting email and password to the user state
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
 	};
+
 	let history = useHistory();
+
+	// Check if password & confirm password matches, then send user to backend to be created in database
 	const handleSignUp = (event) => {
 		event.preventDefault();
-		// Check if password & confirm password matches
 		if (user.password === user.confirm) {
 			api.postSignUp(user, setError);
 			history.push('/signin');

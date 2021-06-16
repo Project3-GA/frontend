@@ -20,9 +20,10 @@ Javascript, HTML, CSS
 Frontend: React.js, Express, RESTful API
 Backend: MongoDB, Mongoose
 
+
 ## Requirements
 
-npm i
+node
 Express.js
 
 
@@ -53,7 +54,8 @@ A planning/ directory in the root of your repo containing a diagram mapping out 
 - State occasionally disappears/ doesn't save and thus the image in the gallery disappears.
 
 # Future Plans
-
+- organizing images by tag
+- refactoring the code base
 ## MVP
 
 - Users can view all images, view single images, post new images, update images or delete images. ✅

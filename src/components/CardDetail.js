@@ -11,6 +11,7 @@ const CardDetail = () => {
 	let params = useParams();
 	const history = useHistory();
 
+	//Storing the newly created tags in the Tags state based off of the user input
 	const handleChange = (event) => {
 		if (event.target.id === 'tags') {
 			const copy = [...cardEdit.tags];
@@ -20,14 +21,19 @@ const CardDetail = () => {
 			setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
 		}
 	};
+
+	//Setting the tag to be deleted from the database 
 	const deleteTag = (e) => {
 		setTagName(e.target.id);
 		api.tagDelete(tagName, params, setError);
 	};
+
+	//Displaying the selected card
 	useEffect(() => {
 		api.getCardDetails(params, setCards, setCardEdit, setError);
 	}, [tags, tagName]);
 
+	//Adding most recently created tag to the tags array, to be added to the specific card in the database
 	const cardUpdate = async (event) => {
 		event.preventDefault();
 		if (tags.length && tags[tags.length - 1]) {

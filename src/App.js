@@ -43,13 +43,10 @@ function App() {
 					<CardCreate />
 				</PrivateRoute>
 
-				{/* <PrivateRoute path='/gallery/:id'>
-					<CardDetail />
-				</PrivateRoute> */}
-
 				<PrivateRoute exact path='/gallery/:id'>
 					<CardDetail user={user} activeUser={activeUser} />
 				</PrivateRoute>
+
 				<PrivateRoute exact path='/collection/:id'>
 					<UserCollection
 						activeUser={activeUser}
@@ -63,13 +60,6 @@ function App() {
 				</PrivateRoute>
 			</Switch>
 
-			{/* <Form
-				loginForm={loginForm}
-				user={user}
-				setUser={setUser}
-				setLoginForm={setLoginForm}
-			/>
-			<Cardform loginForm={loginForm} /> */}
 		</main>
 	);
 }

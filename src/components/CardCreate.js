@@ -5,9 +5,13 @@ const CardCreate = () => {
 	let history = useHistory();
 	const [card, setCard] = useState({ url: '', tags: [] });
 	const [error, setError] = useState(false);
+
+	//Setting card state with the value from the input fields 
 	const handleChange = (event) => {
 		setCard({ ...card, [event.target.id]: event.target.value });
 	};
+
+	//Sending the user input to create a card in the database, then awaiting the promise from the api to push the user to the gallery with the newly created card added to the display. 
 	const handleCardCreate = async (event) => {
 		event.preventDefault();
 		await api.createCard(card, setError);
