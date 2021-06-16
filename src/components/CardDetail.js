@@ -10,6 +10,7 @@ const CardDetail = () => {
 	const [tagName, setTagName] = useState('');
 	let params = useParams();
 	const history = useHistory();
+	const [tag, setTag] = useState('');
 
 	//Storing the newly created tags in the Tags state based off of the user input
 	// const handleChange = (event) => {
@@ -23,10 +24,10 @@ const CardDetail = () => {
 	// };
 
 	//Setting the tag to be deleted from the database
-	// const deleteTag = (e) => {
-	// 	setTagName(e.target.id);
-	// 	api.tagDelete(tagName, params, setError);
-	// };
+	const deleteTag = (e) => {
+		setTagName(e.target.id);
+		api.tagDelete(tagName, params, setError).then((res) => setCards(res));
+	};
 
 	//Displaying the selected card
 	useEffect(() => {
@@ -34,15 +35,15 @@ const CardDetail = () => {
 	}, [tags, tagName]);
 
 	//Adding most recently created tag to the tags array, to be added to the specific card in the database
-	const cardUpdate = async (event) => {
-		event.preventDefault();
-		if (tags.length && tags[tags.length - 1]) {
-			const copy = { ...cardEdit };
-			copy.tags.push(tags[tags.length - 1]);
-			await setCardEdit(copy);
-		}
-		api.cardUpdate(params, cardEdit, setCardEdit, setError);
-	};
+	// const cardUpdate = async (event) => {
+	// 	event.preventDefault();
+	// 	if (tags.length && tags[tags.length - 1]) {
+	// 		const copy = { ...cardEdit };
+	// 		copy.tags.push(tags[tags.length - 1]);
+	// 		await setCardEdit(copy);
+	// 	}
+	// 	api.cardUpdate(params, cardEdit, setCardEdit, setError);
+	// };
 
 	return (
 		<div className='gallerydetails'>
@@ -62,18 +63,32 @@ const CardDetail = () => {
 					))}
 				</div>
 			)}
-			<form onSubmit={cardUpdate}>
+			<form
+				onSubmit={(evt) => {
+					evt.preventDefault();
+					api.cardUpdate(tag, params, setError).then((res) => {
+						setCards(res);
+						setTag('');
+					});
+				}}>
 				<label htmlFor='tags'>tags:</label>
-				<input id='tags' type='text' onChange={handleChange} />
+				<input
+					id='tags'
+					type='text'
+					value={tag}
+					onChange={(evt) => {
+						setTag(evt.target.value);
+					}}
+				/>
 				<button type='submit' className='submit-button'>
 					submit
 				</button>
-				<button
-					className='delete-button'
-					onClick={() => api.cardDelete(params, history, setError)}>
-					Delete Image
-				</button>
 			</form>
+			<button
+				className='delete-button'
+				onClick={() => api.cardDelete(params, history, setError)}>
+				Delete Image
+			</button>
 		</div>
 	);
 };

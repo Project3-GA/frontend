@@ -37,7 +37,7 @@ export const postSignIn = (user, setError) => {
 //Cards//
 
 //Get all cards from the database and display in the gallery
-export const getGallery = (setCards, setError) => {
+export const getGallery = (setError) => {
 	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
 	return fetch(url, {
 		method: 'GET',
@@ -85,18 +85,17 @@ export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 };
 
 //Adding new tags to an individual card
-export const cardUpdate = (params, cardEdit, setCardEdit, setError) => {
+export const cardUpdate = (tag, params, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
-	fetch(url, {
+	return fetch(url, {
 		method: 'PATCH',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify(cardEdit),
+		body: JSON.stringify({ tag }),
 	})
 		.then((res) => res.json())
-		.then((data) => (data ? setCardEdit(data) : null))
 		.catch(() => setError(true));
 };
 
@@ -117,14 +116,16 @@ export const cardDelete = (params, history, setError) => {
 //Deletes a tag from an individual card
 export const tagDelete = (tagName, params, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/tags/${params.id}`;
-	fetch(url, {
+	return fetch(url, {
 		method: 'PATCH',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
 			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ tags: tagName }),
-	}).catch(() => setError(true));
+	})
+		.then((res) => res.json())
+		.catch(() => setError(true));
 };
 
 //Gets all cards created by the authenticated user
