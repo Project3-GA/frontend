@@ -12,21 +12,21 @@ const CardDetail = () => {
 	const history = useHistory();
 
 	//Storing the newly created tags in the Tags state based off of the user input
-	const handleChange = (event) => {
-		if (event.target.id === 'tags') {
-			const copy = [...cardEdit.tags];
-			copy.push(event.target.value);
-			setTags(copy);
-		} else {
-			setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
-		}
-	};
+	// const handleChange = (event) => {
+	// 	if (event.target.id === 'tags') {
+	// 		const copy = [...cardEdit.tags];
+	// 		copy.push(event.target.value);
+	// 		setTags(copy);
+	// 	} else {
+	// 		setCardEdit({ ...cardEdit, [event.target.id]: event.target.value });
+	// 	}
+	// };
 
-	//Setting the tag to be deleted from the database 
-	const deleteTag = (e) => {
-		setTagName(e.target.id);
-		api.tagDelete(tagName, params, setError);
-	};
+	//Setting the tag to be deleted from the database
+	// const deleteTag = (e) => {
+	// 	setTagName(e.target.id);
+	// 	api.tagDelete(tagName, params, setError);
+	// };
 
 	//Displaying the selected card
 	useEffect(() => {

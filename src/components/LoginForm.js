@@ -5,16 +5,17 @@ const LoginForm = ({ user, setUser, setActiveUser, activeUser }) => {
 	const [error, setError] = useState(false);
 	let history = useHistory();
 
-	//Setting email and password to user state 
+	//Setting email and password to user state
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.id]: event.target.value });
 	};
 
-	//Sending user email and password to database, and awaiting return of token.  Setting the token to local storage and the user id to the activeUser state to allow access to components.  
+	//Sending user email and password to database, and awaiting return of token.  Setting the token to local storage and the user id to the activeUser state to allow access to components.
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		let data = await api.postSignIn(user, setError);
 		setActiveUser(data ? JSON.parse(atob(data.token.split('.')[1])).id : null);
+
 		if (!data) {
 			return null;
 		} else {

@@ -39,7 +39,7 @@ export const postSignIn = (user, setError) => {
 //Get all cards from the database and display in the gallery
 export const getGallery = (setCards, setError) => {
 	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
-	fetch(url, {
+	return fetch(url, {
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
@@ -47,11 +47,11 @@ export const getGallery = (setCards, setError) => {
 		},
 	})
 		.then((res) => res.json())
-		.then((data) => setCards(data))
+		.then((data) => data)
 		.catch(() => setError(true));
 };
 
-//Create a new card 
+//Create a new card
 export const createCard = (card, setError) => {
 	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
 	return fetch(url, {
@@ -66,7 +66,7 @@ export const createCard = (card, setError) => {
 		.catch(() => setError(true));
 };
 
-//Get a specific a card from the database and displays on Card Details 
+//Get a specific a card from the database and displays on Card Details
 export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
 	fetch(url, {
@@ -142,10 +142,7 @@ export const getPersonal = (activeUser, setCards, setError) => {
 		.catch(() => setError(true));
 };
 
-
 //////////LOCALHOST TESTING//////////
-
-
 
 // const token = localStorage.getItem('token');
 // export const getGallery = (setCards, setError) => {
