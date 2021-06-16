@@ -223,9 +223,10 @@ export const tagDelete = (tagName, params, setError) => {
 		body: JSON.stringify({ tags: tagName }),
 	}).catch(() => setError(true));
 };
-export const getUserCollection = (setCards, setError) => {
-	const url = 'http://localhost:3000/api/cards';
-	fetch(url, {
+
+export const getPersonal = (activeUser, setCards, setError) => {
+	const url = `http://localhost:3000/api/cards/personal/${activeUser}`;
+	return fetch(url, {
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
