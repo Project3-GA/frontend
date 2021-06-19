@@ -6,22 +6,22 @@ import { Link } from 'react-router-dom';
 const UserCollection = ({ activeUser, setCards, cards }) => {
 	const [error, setError] = useState(false);
 	useEffect(() => {
-		api.getPersonal(activeUser, setCards, setError);
+		api.getPersonal(activeUser, setError).then((res) => setCards(res));
 	}, []);
-
 	return (
 		<div>
 			<div className='gallery'>
-				{cards?.map((card) => {
-					return (
-						<>
-							<Link to={`/gallery/${card._id}`}>
-								{' '}
-								<img src={card.url} alt='picture' key={card.id} />
-							</Link>
-						</>
-					);
-				})}
+				{cards &&
+					cards.map((card) => {
+						return (
+							<>
+								<Link to={`/gallery/${card._id}`}>
+									{' '}
+									<img src={card.url} alt='picture' key={card.id} />
+								</Link>
+							</>
+						);
+					})}
 			</div>
 		</div>
 	);

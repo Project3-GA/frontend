@@ -14,16 +14,17 @@ const Gallery = ({ cards, setCards, activeUser }) => {
 
 	return (
 		<div className='gallery'>
-			{cards.map((card) => {
-				return (
-					<>
-						<Link to={`/gallery/${card._id}`}>
-							{' '}
-							<img src={card.url} alt='picture' key={card.id} />
-						</Link>
-					</>
-				);
-			})}
+			{cards &&
+				cards.map((card) => {
+					return (
+						<>
+							<Link to={`/gallery/${card._id}`}>
+								{' '}
+								<img src={card.url} alt='picture' key={card.id} />
+							</Link>
+						</>
+					);
+				})}
 		</div>
 	);
 };

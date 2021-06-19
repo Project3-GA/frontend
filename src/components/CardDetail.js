@@ -47,11 +47,12 @@ const CardDetail = () => {
 
 	return (
 		<div className='gallerydetails'>
-			<img src={cards.url} alt='picture' className='detail-image' />
+			<img src={cards && cards.url} alt='picture' className='detail-image' />
 
-			{!cards.tags ? null : (
-				<div className='tags-div'>
-					{cards.tags.map((tag) => (
+			<div className='tags-div'>
+				{cards &&
+					cards.tags &&
+					cards.tags.map((tag) => (
 						<div>
 							<h3>
 								{tag}
@@ -61,8 +62,8 @@ const CardDetail = () => {
 							</h3>
 						</div>
 					))}
-				</div>
-			)}
+			</div>
+
 			<form
 				onSubmit={(evt) => {
 					evt.preventDefault();

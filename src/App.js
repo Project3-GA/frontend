@@ -59,7 +59,6 @@ function App() {
 					<Gallery cards={cards} setCards={setCards} />
 				</PrivateRoute>
 			</Switch>
-
 		</main>
 	);
 }

@@ -2,12 +2,12 @@
 
 //setting the token in localStorage to use for authentication
 const token = localStorage.getItem('token');
-
+const urlBase = 'http://localhost:3000';
 //Authentication//
 
 //Creates a new user in the database
 export const postSignUp = (user, setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/users/signup';
+	const url = `${urlBase}/api/users/signup`;
 	fetch(url, {
 		method: 'POST',
 		headers: {
@@ -22,7 +22,7 @@ export const postSignUp = (user, setError) => {
 
 //Authenticates user and provides token
 export const postSignIn = (user, setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/users/signin';
+	const url = `${urlBase}/api/users/signin`;
 	return fetch(url, {
 		method: 'POST',
 		headers: {
@@ -38,7 +38,7 @@ export const postSignIn = (user, setError) => {
 
 //Get all cards from the database and display in the gallery
 export const getGallery = (setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
+	const url = `${urlBase}/api/cards`;
 	return fetch(url, {
 		method: 'GET',
 		headers: {
@@ -53,12 +53,11 @@ export const getGallery = (setError) => {
 
 //Create a new card
 export const createCard = (card, setError) => {
-	const url = 'https://hatcrew-be.herokuapp.com/api/cards';
+	const url = `${urlBase}/api/cards`;
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify(card),
 	})
@@ -68,7 +67,7 @@ export const createCard = (card, setError) => {
 
 //Get a specific a card from the database and displays on Card Details
 export const getCardDetails = (params, setCards, setCardEdit, setError) => {
-	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
+	const url = `${urlBase}/api/cards/${params.id}`;
 	fetch(url, {
 		method: 'GET',
 		headers: {
@@ -86,7 +85,7 @@ export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 
 //Adding new tags to an individual card
 export const cardUpdate = (tag, params, setError) => {
-	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
+	const url = `${urlBase}/api/cards/${params.id}`;
 	return fetch(url, {
 		method: 'PATCH',
 		headers: {
@@ -101,7 +100,7 @@ export const cardUpdate = (tag, params, setError) => {
 
 //Deletes a card from the database
 export const cardDelete = (params, history, setError) => {
-	const url = `https://hatcrew-be.herokuapp.com/api/cards/${params.id}`;
+	const url = `${urlBase}/api/cards/${params.id}`;
 	fetch(url, {
 		method: 'DELETE',
 		headers: {
@@ -115,7 +114,7 @@ export const cardDelete = (params, history, setError) => {
 
 //Deletes a tag from an individual card
 export const tagDelete = (tagName, params, setError) => {
-	const url = `https://hatcrew-be.herokuapp.com/api/cards/tags/${params.id}`;
+	const url = `${urlBase}/api/cards/tags/${params.id}`;
 	return fetch(url, {
 		method: 'PATCH',
 		headers: {
@@ -129,18 +128,20 @@ export const tagDelete = (tagName, params, setError) => {
 };
 
 //Gets all cards created by the authenticated user
-export const getPersonal = (activeUser, setCards, setError) => {
-	const url = `https://hatcrew-be.herokuapp.com/api/cards/personal/${activeUser}`;
-	return fetch(url, {
-		method: 'GET',
-		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then((res) => res.json())
-		.then((data) => setCards(data))
-		.catch(() => setError(true));
+export const getPersonal = (activeUser, setError) => {
+	const url = `${urlBase}/api/cards/personal/${activeUser}`;
+	return (
+		fetch(url, {
+			method: 'GET',
+			headers: {
+				'Content-type': 'application/json; charset=UTF-8',
+				Authorization: `Bearer ${token}`,
+			},
+		})
+			.then((res) => res.json())
+			// .then((data) => setCards(data))
+			.catch(() => setError(true))
+	);
 };
 
 //////////LOCALHOST TESTING//////////
