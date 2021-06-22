@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 import * as api from './APIFile';
 const CardDetail = () => {
@@ -35,15 +35,6 @@ const CardDetail = () => {
 	}, [tags, tagName]);
 
 	//Adding most recently created tag to the tags array, to be added to the specific card in the database
-	// const cardUpdate = async (event) => {
-	// 	event.preventDefault();
-	// 	if (tags.length && tags[tags.length - 1]) {
-	// 		const copy = { ...cardEdit };
-	// 		copy.tags.push(tags[tags.length - 1]);
-	// 		await setCardEdit(copy);
-	// 	}
-	// 	api.cardUpdate(params, cardEdit, setCardEdit, setError);
-	// };
 
 	return (
 		<div className='gallerydetails'>
@@ -54,12 +45,10 @@ const CardDetail = () => {
 					cards.tags &&
 					cards.tags.map((tag) => (
 						<div>
-							<h3>
-								{tag}
-								<button onClick={deleteTag} id={tag}>
-									X
-								</button>
-							</h3>
+							<button onClick={deleteTag} id={tag}>
+								X
+							</button>
+							<h3>{tag}</h3>
 						</div>
 					))}
 			</div>
@@ -84,12 +73,12 @@ const CardDetail = () => {
 				<button type='submit' className='submit-button'>
 					submit
 				</button>
+				<button
+					className='delete-button'
+					onClick={() => api.cardDelete(params, history, setError)}>
+					Delete Image
+				</button>
 			</form>
-			<button
-				className='delete-button'
-				onClick={() => api.cardDelete(params, history, setError)}>
-				Delete Image
-			</button>
 		</div>
 	);
 };
