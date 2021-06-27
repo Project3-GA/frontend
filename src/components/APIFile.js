@@ -2,8 +2,8 @@
 
 //setting the token in localStorage to use for authentication
 const token = localStorage.getItem('token');
-const urlBase = 'http://localhost:3000';
-// const urlBase = 'https://hatcrew-be.herokuapp.com';
+// const urlBase = 'http://localhost:3000';
+const urlBase = 'https://hatcrew-be.herokuapp.com';
 //Authentication//
 
 //Creates a new user in the database
