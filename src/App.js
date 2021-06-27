@@ -47,7 +47,7 @@ function App() {
 					<CardDetail user={user} activeUser={activeUser} />
 				</PrivateRoute>
 
-				<PrivateRoute exact path='/collection/:id'>
+				<PrivateRoute exact path='/collection'>
 					<UserCollection
 						activeUser={activeUser}
 						setCards={setCards}
@@ -59,7 +59,6 @@ function App() {
 					<Gallery cards={cards} setCards={setCards} />
 				</PrivateRoute>
 			</Switch>
-
 		</main>
 	);
 }

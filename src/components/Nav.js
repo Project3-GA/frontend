@@ -13,7 +13,7 @@ const Nav = ({ activeUser }) => {
 					<Link to='/gallery'>home</Link>
 				</li>
 				<li>
-					<Link to={`/collection/${activeUser}`}>my images</Link>
+					<Link to={`/collection`}>my images</Link>
 				</li>
 				<li>
 					<Link to='/gallery/create'>add image</Link>

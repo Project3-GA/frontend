@@ -37,6 +37,10 @@ h3 {
 	flex-wrap: wrap;
 	justify-content: center;
 }
+.tags {
+	text-decoration: none;
+	color: black;
+}
 .nav-ul {
 	display: flex;
 	padding: 10px;
