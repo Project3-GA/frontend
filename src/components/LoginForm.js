@@ -14,12 +14,13 @@ const LoginForm = ({ user, setUser, setActiveUser, activeUser }) => {
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		let data = await api.postSignIn(user, setError);
+		console.log(data)
 		setActiveUser(data ? JSON.parse(atob(data.token.split('.')[1])).id : null);
 
 		if (!data) {
 			return null;
 		} else {
-			localStorage.setItem('token', data.token);
+			localStorage.setItem('token', data.token)
 			history.push('/gallery');
 		}
 	};

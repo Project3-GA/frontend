@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const UserCollection = ({ activeUser, setCards, cards }) => {
 	const [error, setError] = useState(false);
 	useEffect(() => {
-		api.getPersonal(activeUser, setError).then((res) => setCards(res));
+		api.getPersonal(setError).then((res) => setCards(res));
 	}, []);
 	return (
 		<div>

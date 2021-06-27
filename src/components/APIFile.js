@@ -2,8 +2,8 @@
 
 //setting the token in localStorage to use for authentication
 const token = localStorage.getItem('token');
-// const urlBase = 'http://localhost:3000';
-const urlBase = 'https://hatcrew-be.herokuapp.com';
+const urlBase = 'http://localhost:3000';
+// const urlBase = 'https://hatcrew-be.herokuapp.com';
 //Authentication//
 
 //Creates a new user in the database
@@ -44,7 +44,7 @@ export const getGallery = (setError) => {
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 	})
 		.then((res) => res.json())
@@ -59,6 +59,7 @@ export const createCard = (card, setError) => {
 		method: 'POST',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 		body: JSON.stringify(card),
 	})
@@ -73,7 +74,7 @@ export const getCardDetails = (params, setCards, setCardEdit, setError) => {
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 	})
 		.then((res) => res.json())
@@ -91,7 +92,7 @@ export const cardUpdate = (tag, params, setError) => {
 		method: 'PATCH',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 		body: JSON.stringify({ tag }),
 	})
@@ -106,7 +107,7 @@ export const cardDelete = (params, history, setError) => {
 		method: 'DELETE',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 	})
 		.then(history.goBack())
@@ -120,7 +121,7 @@ export const tagDelete = (tagName, params, setError) => {
 		method: 'PATCH',
 		headers: {
 			'Content-type': 'application/json; charset=UTF-8',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
 		body: JSON.stringify({ tags: tagName }),
 	})
@@ -129,14 +130,14 @@ export const tagDelete = (tagName, params, setError) => {
 };
 
 //Gets all cards created by the authenticated user
-export const getPersonal = (activeUser, setError) => {
-	const url = `${urlBase}/api/cards/personal/${activeUser}`;
+export const getPersonal = (setError) => {
+	const url = `${urlBase}/api/cards/personal/1`;
 	return (
 		fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
 		})
 			.then((res) => res.json())
